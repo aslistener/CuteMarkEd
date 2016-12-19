@@ -620,7 +620,7 @@ void Options::writeSettings()
 
 void Options::migrateLastUsedStyleOption(QSettings &settings)
 {
-    static const QMap<QString, QString> migrations {
+    static const QMap<QString, QString> migrations ({
         { "actionDefault", "Default" },
         { "actionGithub", "Github" },
         { "actionSolarizedLight", "Solarized Light" },
@@ -628,7 +628,7 @@ void Options::migrateLastUsedStyleOption(QSettings &settings)
         { "actionClearness", "Clearness" },
         { "actionClearnessDark", "Clearness Dark" },
         { "actionBywordDark", "Byword Dark" }
-    };
+    });
 
     QString lastUsedStyle = settings.value(DEPRECATED__LAST_USED_STYLE).toString();
     m_lastUsedTheme = migrations[lastUsedStyle];

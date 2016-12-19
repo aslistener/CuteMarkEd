@@ -34,7 +34,7 @@ Theme JsonThemeTranslator::fromJsonObject(const QJsonObject &object)
     QString previewStylesheet = object.value(PREVIEW_STYLESHEET).toString();
     bool builtIn = object.value(BUILT_IN).toBool();
 
-    return { name, markdownHighlighting, codeHighlighting, previewStylesheet, builtIn };
+    return Theme( name, markdownHighlighting, codeHighlighting, previewStylesheet, builtIn );
 }
 
 QJsonObject JsonThemeTranslator::toJsonObject(const Theme &theme)

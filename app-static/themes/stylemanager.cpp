@@ -19,30 +19,45 @@
 #include <QMap>
 
 
-static const QMap<QString, QString> BUILTIN_MARKDOWN_HIGHLIGHTINGS = {
-    { "Default", "default" },
-    { "Solarized Light", "solarized-light" },
-    { "Solarized Dark", "solarized-dark" },
-    { "Clearness Dark", "clearness-dark" },
-    { "Byword Dark", "byword-dark" }
+
+QMap<QString, QString> getMarkdownHighlight()
+{
+    QMap<QString, QString> map;
+    map.insert( "Default", "default" );
+    map.insert( "Solarized Light", "solarized-light" );
+    map.insert( "Solarized Dark", "solarized-dark" );
+    map.insert( "Clearness Dark", "clearness-dark" );
+    map.insert( "Byword Dark", "byword-dark" );
+    return map;
 };
 
-static const QMap<QString, QString> BUILTIN_CODE_HIGHLIGHTINGS = {
-    { "Default", "default" },
-    { "Github", "github" },
-    { "Solarized Light", "solarized_light" },
-    { "Solarized Dark", "solarized_dark" }
+QMap<QString, QString> getCodeHighlight()
+{
+    QMap<QString, QString> map;
+    map.insert("Default", "default"                );
+    map.insert("Github", "github"                  );
+    map.insert("Solarized Light", "solarized_light");
+    map.insert("Solarized Dark", "solarized_dark"  );
+    return map;
 };
 
-static const QMap<QString, QString> BUILTIN_PREVIEW_STYLESHEETS = {
-    { "Default", "qrc:/css/markdown.css" },
-    { "Github", "qrc:/css/github.css" },
-    { "Solarized Light", "qrc:/css/solarized-light.css" },
-    { "Solarized Dark", "qrc:/css/solarized-dark.css" },
-    { "Clearness", "qrc:/css/clearness.css" },
-    { "Clearness Dark", "qrc:/css/clearness-dark.css" },
-    { "Byword Dark", "qrc:/css/byword-dark.css" }
+QMap<QString, QString> getPreviewHighlight()
+{
+    QMap<QString, QString> map;
+    map.insert("Default", "qrc:/css/markdown.css"               );
+    map.insert("Github", "qrc:/css/github.css"                  );
+    map.insert("Solarized Light", "qrc:/css/solarized-light.css");
+    map.insert("Solarized Dark", "qrc:/css/solarized-dark.css"  );
+    map.insert("Clearness", "qrc:/css/clearness.css"            );
+    map.insert("Clearness Dark", "qrc:/css/clearness-dark.css"  );
+    map.insert("Byword Dark", "qrc:/css/byword-dark.css"        );
+    return map;
 };
+
+static const QMap<QString, QString> BUILTIN_MARKDOWN_HIGHLIGHTINGS = getMarkdownHighlight();
+
+static const QMap<QString, QString> BUILTIN_CODE_HIGHLIGHTINGS = getCodeHighlight();
+static const QMap<QString, QString> BUILTIN_PREVIEW_STYLESHEETS = getPreviewHighlight();
 
 QMap<QString, QString> StyleManager::customPreviewStylesheets;
 
