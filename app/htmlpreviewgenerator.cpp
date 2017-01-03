@@ -29,6 +29,7 @@
 
 #include <template/template.h>
 
+#include "constants.h"
 #include "options.h"
 #include "yamlheaderchecker.h"
 
@@ -155,13 +156,20 @@ void HtmlPreviewGenerator::run()
         {
             // wait for new task
             QMutexLocker locker(&tasksMutex);
-            while (tasks.count() == 0) {
+
+            if (tasks.count() == 0) {
                 bufferNotEmpty.wait(&tasksMutex);
             }
+            else  // get last task from queue and skip all previous tasks
+                 text = tasks.dequeue();
 
-            // get last task from queue and skip all previous tasks
-            while (!tasks.isEmpty())
-                text = tasks.dequeue();
+//            while (tasks.count() == 0) {
+//                bufferNotEmpty.wait(&tasksMutex);
+//            }
+
+//            // get last task from queue and skip all previous tasks
+//            while (!tasks.isEmpty())
+//                text = tasks.dequeue();
         }
 
         // end processing?
@@ -276,8 +284,6 @@ Template::RenderOptions HtmlPreviewGenerator::renderOptions() const
 
 int HtmlPreviewGenerator::calculateDelay(const QString &text)
 {
-    const int MINIMUM_DELAY = 50;
-    const int MAXIMUM_DELAY = 2000;
 
     // calculate the processing delay based on amount of characters in the
     // markdown text. The delay is restricted to the interval [50, 2000] milliseconds;

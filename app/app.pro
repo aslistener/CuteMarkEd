@@ -293,3 +293,6 @@ unix:!macx {
    INSTALLS += target desktop icon16 icon32 icon48 icon64 icon128 iconsvg
    message("The project will be installed in prefix $${PREFIX}")
 }
+
+include(../win_dbg.pri)
+include(../utils/utils.pri)
